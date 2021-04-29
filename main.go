@@ -7,7 +7,11 @@ import (
 	"gorobbs/bootstrap"
 	"gorobbs/package/setting"
 	router "gorobbs/router/v1"
+
+	"github.com/eavesmy/glog"
 )
+
+var log = glog.New("[app]")
 
 func main() {
 	bootstrap.SetUp()
@@ -21,6 +25,8 @@ func main() {
 		WriteTimeout:   setting.ServerSetting.WriteTimeout,
 		MaxHeaderBytes: 1 << 20,
 	}
+
+	log.Info("start")
 
 	if err := s.ListenAndServe(); err != nil {
 		panic(err.Error())
